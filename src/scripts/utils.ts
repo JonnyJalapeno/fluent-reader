@@ -35,8 +35,8 @@ const rssParser = new Parser({
 type extractGeneric<Type> = Type extends Parser<infer _, infer U> ? U : never
 export type MyParserItem = extractGeneric<typeof rssParser> & Parser.Item
 
-const CHARSET_RE = /charset=([^()<>@,;:\"/[\]?.=\s]*)/i
-const XML_ENCODING_RE = /^<\?xml.+encoding="(.+?)".*?\?>/i
+const CHARSET_RE = /charset=["']?([^()<>@,;:"'/[\]?.=\s]*)/i
+const XML_ENCODING_RE = /^<\?xml.+encoding=["'](.+?)["'].*?\?>/i
 export async function decodeFetchResponse(response: Response, isHTML = false) {
     const buffer = await response.arrayBuffer()
     let ctype =
